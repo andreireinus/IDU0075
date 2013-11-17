@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://idu0075.ttu.ee/111881/News/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://idu0075.ttu.ee/111881/News/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://idu0075.ttu.ee/111881/News/">
+      <s:element name="Analyze">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="time" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AnalyzeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AnalyzeResult" type="tns:ArrayOfAnalyzeResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAnalyzeResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AnalyzeResult" nillable="true" type="tns:AnalyzeResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AnalyzeResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="StockTicker" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NewsUrl" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NewsDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpenPrice" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClosePrice" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AnalyzeSoapIn">
+    <wsdl:part name="parameters" element="tns:Analyze" />
+  </wsdl:message>
+  <wsdl:message name="AnalyzeSoapOut">
+    <wsdl:part name="parameters" element="tns:AnalyzeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="NewsServiceSoap">
+    <wsdl:operation name="Analyze">
+      <wsdl:input message="tns:AnalyzeSoapIn" />
+      <wsdl:output message="tns:AnalyzeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NewsServiceSoap" type="tns:NewsServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Analyze">
+      <soap:operation soapAction="http://idu0075.ttu.ee/111881/News/Analyze" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NewsServiceSoap12" type="tns:NewsServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Analyze">
+      <soap12:operation soapAction="http://idu0075.ttu.ee/111881/News/Analyze" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NewsService">
+    <wsdl:port name="NewsServiceSoap" binding="tns:NewsServiceSoap">
+      <soap:address location="http://localhost:40002/NewsService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NewsServiceSoap12" binding="tns:NewsServiceSoap12">
+      <soap12:address location="http://localhost:40002/NewsService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
