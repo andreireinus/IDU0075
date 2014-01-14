@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="IDU0075" resourceRoot="" soapui-version="4.6.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ServiceSoap" type="wsdl" bindingName="{http://idu0075.ttu.ee/111881/Stocks/}ServiceSoap" soapVersion="1_1" anonymous="optional" definition="file:/C:/1_Devel/00_Kool/IDU0075/wsdl/stocks.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/1_Devel/00_Kool/IDU0075/wsdl/stocks.wsdl"><con:part><con:url>file:/C:/1_Devel/00_Kool/IDU0075/wsdl/stocks.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://idu0075.ttu.ee/111881/Stocks/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://idu0075.ttu.ee/111881/Stocks/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://idu0075.ttu.ee/111881/Stocks/">
+      <s:element name="GetTickers">
+        <s:complexType/>
+      </s:element>
+      <s:element name="GetTickersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTickersResult" type="tns:ArrayOfString"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPrices">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ticker" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="from" type="s:dateTime"/>
+            <s:element minOccurs="1" maxOccurs="1" name="to" type="s:dateTime"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPricesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPricesResult" type="tns:ArrayOfStockPrice"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfStockPrice">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StockPrice" nillable="true" type="tns:StockPrice"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StockPrice">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="OpenPrice" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="HighPrice" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="LowPrice" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="ClosePrice" type="s:double"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetWeeklyPrice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stock" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="date" type="s:dateTime"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWeeklyPriceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWeeklyPriceResult" type="tns:StockWeekPrice"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StockWeekPrice">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Year" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Week" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="StartPrice" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="EndPrice" type="s:double"/>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetTickersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTickers"/>
+  </wsdl:message>
+  <wsdl:message name="GetTickersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTickersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetPricesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrices"/>
+  </wsdl:message>
+  <wsdl:message name="GetPricesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPricesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetWeeklyPriceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWeeklyPrice"/>
+  </wsdl:message>
+  <wsdl:message name="GetWeeklyPriceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWeeklyPriceResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="GetTickers">
+      <wsdl:input message="tns:GetTickersSoapIn"/>
+      <wsdl:output message="tns:GetTickersSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrices">
+      <wsdl:input message="tns:GetPricesSoapIn"/>
+      <wsdl:output message="tns:GetPricesSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyPrice">
+      <wsdl:input message="tns:GetWeeklyPriceSoapIn"/>
+      <wsdl:output message="tns:GetWeeklyPriceSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetTickers">
+      <soap:operation soapAction="http://idu0075.ttu.ee/111881/Stocks/GetTickers" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrices">
+      <soap:operation soapAction="http://idu0075.ttu.ee/111881/Stocks/GetPrices" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyPrice">
+      <soap:operation soapAction="http://idu0075.ttu.ee/111881/Stocks/GetWeeklyPrice" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetTickers">
+      <soap12:operation soapAction="http://idu0075.ttu.ee/111881/Stocks/GetTickers" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrices">
+      <soap12:operation soapAction="http://idu0075.ttu.ee/111881/Stocks/GetPrices" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyPrice">
+      <soap12:operation soapAction="http://idu0075.ttu.ee/111881/Stocks/GetWeeklyPrice" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://localhost:40001/Service.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://localhost:40001/Service.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:40001/Service.asmx</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://idu0075.ttu.ee/111881/Stocks/GetPrices" name="GetPrices" bindingOperationName="GetPrices" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="GetPricesLive"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:40001/Service.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:stoc="http://idu0075.ttu.ee/111881/Stocks/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <stoc:GetPrices>
+         <!--Optional:-->
+         <stoc:ticker>AAPL</stoc:ticker>
+         <stoc:from>2012-01-01T00:00:00</stoc:from>
+         <stoc:to>2012-01-04T00:00:00</stoc:to>
+      </stoc:GetPrices>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://idu0075.ttu.ee/111881/Stocks/GetPrices"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://idu0075.ttu.ee/111881/Stocks/GetTickers" name="GetTickers" bindingOperationName="GetTickers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="GetTickersLive"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:40001/Service.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:stoc="http://idu0075.ttu.ee/111881/Stocks/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <stoc:GetTickers/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://idu0075.ttu.ee/111881/Stocks/GetTickers"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://idu0075.ttu.ee/111881/Stocks/GetWeeklyPrice" name="GetWeeklyPrice" bindingOperationName="GetWeeklyPrice" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:40001/Service.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:stoc="http://idu0075.ttu.ee/111881/Stocks/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <stoc:GetWeeklyPrice>
+         <!--Optional:-->
+         <stoc:stock>?</stoc:stock>
+         <stoc:date>?</stoc:date>
+      </stoc:GetWeeklyPrice>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://idu0075.ttu.ee/111881/Stocks/GetWeeklyPrice"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService port="8080" path="/" host="EE-R9G068A" name="MockService Stock"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="GetPrices" interface="ServiceSoap" operation="GetPrices"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:stoc="http://idu0075.ttu.ee/111881/Stocks/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <stoc:GetPricesResponse>
+         <!--Optional:-->
+         <stoc:GetPricesResult>
+            <!--Zero or more repetitions:-->
+            <stoc:StockPrice>
+               <stoc:Date>?</stoc:Date>
+               <stoc:OpenPrice>?</stoc:OpenPrice>
+               <stoc:HighPrice>?</stoc:HighPrice>
+               <stoc:LowPrice>?</stoc:LowPrice>
+               <stoc:ClosePrice>?</stoc:ClosePrice>
+            </stoc:StockPrice>
+         </stoc:GetPricesResult>
+      </stoc:GetPricesResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://idu0075.ttu.ee/111881/Stocks/GetPrices"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
